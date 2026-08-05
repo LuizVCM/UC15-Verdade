@@ -1,14 +1,20 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
-const CartaoPerfil = () => {
+interface Teste{
+       nome:string,
+       imagem: string,
+       descricao: string
+}
+
+const CartaoPerfil = ({nome, imagem, descricao}: Teste) => {
     return (
         <View style={styles.fundo}>
             <View style={styles.ajeitar}>
-                <Image source={{ uri: 'https://plus.unsplash.com/premium_photo-1661962655543-b88aafe382e9?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVtZXxlbnwwfHwwfHx8MA%3D%3D' }} style={styles.imagem} />
-                <Text style={styles.user} numberOfLines={2}>SupremoPrimata@primata2.0</Text>
+                <Image source={{ uri: imagem }} style={styles.imagem} />
+                <Text style={styles.user} numberOfLines={2}>{nome}</Text>
             </View>
-            <Text numberOfLines={2} style={styles.bio}>"Aqui se encontra o primeiro usuário da primeira rede social daqui da selva 🌴🌴🌴🌴"</Text>
+            <Text numberOfLines={2} style={styles.bio}>{descricao}</Text>
             <TouchableOpacity style={styles.btn}> 
                 <Text style={styles.btnTexto}>
                     Seguir

@@ -45,6 +45,15 @@ const Calculadora = () => {
         <TouchableOpacity style={styles.btn} onPress={() => setResult(Number(valor1) + Number(valor2))}>
            <Text> Somar </Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={() => setResult(Number(valor1) - Number(valor2))}>
+           <Text> subtrair </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={() => setResult(Number(valor1) * Number(valor2))}>
+           <Text> multiplicar </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.btn} onPress={() => setResult(Number(valor1) / Number(valor2))}>
+           <Text> dividir </Text>
+        </TouchableOpacity>
      </View>
      <View style={styles.resultsss}>
         <Text> Resultado: {result}</Text>

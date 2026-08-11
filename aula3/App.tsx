@@ -5,11 +5,16 @@ import LigarDesligar from './components/LigarDesligar';
 import Contador from './components/Contador';
 import CampoNome from './components/CampoNome';
 import Calculadora from './components/Calculadora';
+import ListaUsuarios from './components/ListaUsuarios';
+import ListarProdutos from './components/ListarProdutos';
+import Busca from './components/Busca';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Calculadora/>
+          <Busca/>
+      <ListarProdutos/>
+  
     </View>
   );
 }
@@ -20,5 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 100
   },
 });

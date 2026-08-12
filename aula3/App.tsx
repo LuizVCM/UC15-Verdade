@@ -13,7 +13,7 @@ export default function App() {
   return (
     <View style={styles.container}>
           <Busca/>
-      <ListarProdutos/>
+    
   
     </View>
   );

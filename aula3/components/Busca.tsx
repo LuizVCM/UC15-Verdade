@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, TextInput, FlatList, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TextInput, FlatList, Button, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import CardProduto from './CardProduto'
+import ListarProdutos from './ListarProdutos'
 
 
 const produtos = [
@@ -12,7 +13,7 @@ const produtos = [
     { id: '7', imagem: 'https://vtexassets.com', nome: 'leite integral 1l', preco: '4.89' },
     { id: '8', imagem: 'https://media-amazon.com', nome: 'fita isolante 20m', preco: '8.50' },
     { id: '9', imagem: 'https://tcdn.com.br', nome: 'detergente neutro 500ml', preco: '2.25' },
-    { id: '10', imagem: 'https://vtexassets.com', nome: 'creme dental 90g', preco: '3.99' },
+     { id: '10', imagem: 'https://vtexassets.com', nome: 'creme dental 90g', preco: '3.99' },
     { id: '11', imagem: 'https://media-amazon.com', nome: 'mouse sem fio usb', preco: '59.90' },
     { id: '12', imagem: 'https://gimba.com.br', nome: 'papel sulfite a4 500fls', preco: '28.40' },
     { id: '13', imagem: 'https://tcdn.com.br', nome: 'azeite de oliva 500ml', preco: '38.99' },
@@ -53,25 +54,35 @@ const produtos = [
     { id: '48', imagem: 'https://cstrip.net', nome: 'caixa de bombom 250g', preco: '12.99' },
     { id: '49', imagem: 'https://media-amazon.com', nome: 'adaptador benjamim t', preco: '4.50' },
     { id: '50', imagem: 'https://vtexassets.com', nome: 'sabão em pó 800g', preco: '16.90' }
+   
 ]
 
 
 const Busca = () => {
     const [termo, setTermo] = useState('')
-    const [encontrado, setEncontrado] = useState(produtos)
+    const [encontrado, procurar] = useState(produtos)
+    
 
-    function procurar(texto: string){
-        produtos.filter()
-         
-    }
   return (
-    <View style={styles.container}>
+    <View style={styles.td}>
+        <View style={styles.container}>
     <Text style={styles.text}> Pesquise aqui:</Text>
       <TextInput style={styles.textInput} value={termo} placeholder='teste aqui' onChangeText={setTermo} />
-     <TouchableOpacity style={styles.botao}>
+     <TouchableOpacity style={styles.botao} onPress={() => procurar(produtos.filter((item) =>
+    item.nome.toLowerCase().includes(termo.toLowerCase())))}>
         <Text style={styles.text}>Procurar</Text>
      </TouchableOpacity>
-          
+          </View>
+          <ScrollView style={styles.results}>
+              <FlatList
+            data={encontrado}
+            numColumns={5}
+            keyExtractor={(item) => item.id}
+            renderItem={({item}) => (
+                <CardProduto id={Number(item.id)} nome={item.nome} imagem={item.imagem} preco={Number(item.preco)}/>
+            )}
+            />
+          </ScrollView>
     </View>
     
   )
@@ -110,5 +121,11 @@ const styles = StyleSheet.create({
         padding: 20,
         
     },
+    td:{
+        gap: 100
+    },
+    results:{
+        height: 600
+    }
 
 })

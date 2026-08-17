@@ -5,15 +5,15 @@ import ListarProdutos from './ListarProdutos'
 
 
 const produtos = [
-     { id: '1', imagem: 'https://medicalfarma.com.br/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-26-at-17.22.22.jpeg', nome: 'alcool', preco: '1.99' },
+    { id: '1', imagem: 'https://medicalfarma.com.br/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-26-at-17.22.22.jpeg', nome: 'alcool', preco: '1.99' },
     { id: '2', imagem: 'https://cdn.awsli.com.br/600x700/2538/2538906/produto/271710660/maca-argentina--1-unidade-aprox--200g--83orvw62e3.png', nome: 'maçã', preco: '13.70' },
     { id: '3', imagem: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Gr%C3%A3o_de_arroz_arb%C3%B3rio.png', nome: '1 arroz', preco: '79.90' },
     { id: '4', imagem: 'https://http2.mlstatic.com/D_NQ_NP_922324-MLB107640592494_032026-O.webp', nome: '10 bananas', preco: '74.99' },
-    { id: '5', imagem: 'https://m.media-amazon.com/images/I/71SKsFC012L._AC_UF894,1000_QL80_.jpg', nome: '1 bomba nuclear', preco: '5.00' },    { id: '6', imagem: 'https://tcdn.com.br', nome: 'café em grãos 1kg', preco: '45.90' },
+    { id: '5', imagem: 'https://m.media-amazon.com/images/I/71SKsFC012L._AC_UF894,1000_QL80_.jpg', nome: '1 bomba nuclear', preco: '5.00' }, { id: '6', imagem: 'https://tcdn.com.br', nome: 'café em grãos 1kg', preco: '45.90' },
     { id: '7', imagem: 'https://vtexassets.com', nome: 'leite integral 1l', preco: '4.89' },
     { id: '8', imagem: 'https://media-amazon.com', nome: 'fita isolante 20m', preco: '8.50' },
     { id: '9', imagem: 'https://tcdn.com.br', nome: 'detergente neutro 500ml', preco: '2.25' },
-     { id: '10', imagem: 'https://vtexassets.com', nome: 'creme dental 90g', preco: '3.99' },
+    { id: '10', imagem: 'https://vtexassets.com', nome: 'creme dental 90g', preco: '3.99' },
     { id: '11', imagem: 'https://media-amazon.com', nome: 'mouse sem fio usb', preco: '59.90' },
     { id: '12', imagem: 'https://gimba.com.br', nome: 'papel sulfite a4 500fls', preco: '28.40' },
     { id: '13', imagem: 'https://tcdn.com.br', nome: 'azeite de oliva 500ml', preco: '38.99' },
@@ -54,44 +54,45 @@ const produtos = [
     { id: '48', imagem: 'https://cstrip.net', nome: 'caixa de bombom 250g', preco: '12.99' },
     { id: '49', imagem: 'https://media-amazon.com', nome: 'adaptador benjamim t', preco: '4.50' },
     { id: '50', imagem: 'https://vtexassets.com', nome: 'sabão em pó 800g', preco: '16.90' }
-   
+
 ]
 
 
 const Busca = () => {
     const [termo, setTermo] = useState('')
     const [encontrado, procurar] = useState(produtos)
-    
 
-  return (
-    <View style={styles.td}>
-        <View style={styles.container}>
-    <Text style={styles.text}> Pesquise aqui:</Text>
-      <TextInput style={styles.textInput} value={termo} placeholder='teste aqui' onChangeText={setTermo} />
-     <TouchableOpacity style={styles.botao} onPress={() => procurar(produtos.filter((item) =>
-    item.nome.toLowerCase().includes(termo.toLowerCase())))}>
-        <Text style={styles.text}>Procurar</Text>
-     </TouchableOpacity>
-          </View>
-          <ScrollView style={styles.results}>
-              <FlatList
-            data={encontrado}
-            numColumns={5}
-            keyExtractor={(item) => item.id}
-            renderItem={({item}) => (
-                <CardProduto id={Number(item.id)} nome={item.nome} imagem={item.imagem} preco={Number(item.preco)}/>
-            )}
-            />
-          </ScrollView>
-    </View>
-    
-  )
+
+    return (
+        <View style={styles.td}>
+            <View style={styles.container}>
+                <Text style={styles.text}> Pesquise aqui:</Text>
+                <TextInput style={styles.textInput} value={termo} placeholder='teste aqui' onChangeText={setTermo} />
+                <TouchableOpacity style={styles.botao} onPress={() => procurar(produtos.filter((item) =>
+                    item.nome.toLowerCase().includes(termo.toLowerCase())))}>
+                    
+                    <Text style={styles.text}>Procurar</Text>
+                </TouchableOpacity>
+            </View>
+            <ScrollView style={styles.results}>
+                <FlatList
+                    data={encontrado}
+                    numColumns={5}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <CardProduto id={Number(item.id)} nome={item.nome} imagem={item.imagem} preco={Number(item.preco)} />
+                    )}
+                />
+            </ScrollView>
+        </View>
+
+    )
 }
 
 export default Busca
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         backgroundColor: 'black',
         padding: 90,
         width: 1500,
@@ -102,29 +103,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 30
     },
-    textInput:{
+    textInput: {
         fontSize: 40,
         width: 500,
-        padding:10,
+        padding: 10,
         backgroundColor: 'white',
         alignItems: 'center',
-       
+
     },
-    text:{
+    text: {
         fontSize: 30,
         fontWeight: '700',
         color: 'white'
 
     },
-    botao:{
+    botao: {
         backgroundColor: 'orange',
         padding: 20,
-        
+
     },
-    td:{
+    td: {
         gap: 100
     },
-    results:{
+    results: {
         height: 600
     }
 

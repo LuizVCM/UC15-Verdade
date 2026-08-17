@@ -25,7 +25,7 @@ export default CardPokemon
 const styles = StyleSheet.create({
     card:{
         backgroundColor: 'rgba(233, 128, 0, 0.72)',
-        height: 300,
+        height: 400,
         width: 300,
         borderWidth: 2,
         borderRadius: 20,

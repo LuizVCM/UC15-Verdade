@@ -2,59 +2,58 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, FlatLi
 import React, { useEffect, useState } from 'react'
 import CardPokemon from './CardPokemon'
 
-
 const Buscar = () => {
+    const [nome, setNome] = useState<string>('')          // texto digitado (controla o input)
+    const [termoBusca, setTermoBusca] = useState<string>('') // termo confirmado pelo botão
+    const [pokemons, setPokemons] = useState<any[]>([])   // lista completa, nunca sobrescrita
 
-    const [nome, setNome] = useState<string>('')
-    const [pokemons, setPokemons] = useState<any[]>([])
-
-     
     useEffect(() => {
         async function buscarPokemons() {
             try {
                 const resposta = await fetch("https://pokeapi.co/api/v2/pokemon/")
-
                 const k = await resposta.json()
                 setPokemons(k.results)
-
-                
-
             } catch (erro) {
-                console.log("Erro ao puxar dados da API", erro) 
+                console.log("Erro ao puxar dados da API", erro)
             }
         }
-
         buscarPokemons()
-        
-       
     }, [])
 
-const dados =  pokemons.filter((item) => item.name.toLowerCase().includes(nome.toLowerCase())) 
+    const getImagemUrl = (url: string) => {
+        const partes = url.split('/').filter(Boolean)
+        const id = partes[partes.length - 1]
+        return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    }
 
-      
+    const dados = pokemons.filter((item) =>
+        item.name.toLowerCase().includes(termoBusca.toLowerCase())
+    )
 
     return (
         <View style={styles.agrupar}>
             <View style={styles.pesquisa}>
-                <Text style={styles.txt}> Pesquisar nome de pokemon: </Text>
-                <TextInput value={nome} placeholder='Escreva o pokemon aqui' onChangeText={setNome} style={[styles.txt, styles.input]} />
-                <TouchableOpacity style={styles.botao} onPress={() => setPokemons(dados)}>
-
+                <Text style={styles.txt}>Pesquisar nome de pokemon:</Text>
+                <TextInput
+                    value={nome}
+                    placeholder="Escreva o pokemon aqui"
+                    onChangeText={setNome}
+                    style={[styles.txt, styles.input]}
+                />
+                <TouchableOpacity style={styles.botao} onPress={() => setTermoBusca(nome)}>
                     <Text style={styles.txt}>Procurar</Text>
                 </TouchableOpacity>
-                <Text style={styles.txt}>{dados}</Text>
             </View>
 
             <ScrollView style={styles.pkmns}>
                 <FlatList
-                    data={nome}
+                    data={dados}
                     numColumns={5}
-                    keyExtractor={(item) => item}
+                    keyExtractor={(item) => item.name}
                     renderItem={({ item }) => (
-                        <CardPokemon nome={item} imagem={item} />
+                        <CardPokemon nome={item.name} imagem={getImagemUrl(item.url)} />
                     )}
                 />
-
             </ScrollView>
         </View>
     )
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
         borderColor: 'orange'
     },
     pkmns: {
-        width: '90%',
+        width: '100%',
         height: '100%',
         padding: 50
     }

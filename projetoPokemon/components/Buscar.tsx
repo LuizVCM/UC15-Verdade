@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react'
 import CardPokemon from './CardPokemon'
 
 const Buscar = () => {
-    const [nome, setNome] = useState<string>('')          // texto digitado (controla o input)
-    const [termoBusca, setTermoBusca] = useState<string>('') // termo confirmado pelo botão
-    const [pokemons, setPokemons] = useState<any[]>([])   // lista completa, nunca sobrescrita
-
+    const [nome, setNome] = useState<string>('')          
+    const [termoBusca, setTermoBusca] = useState<string>('') 
+    const [pokemons, setPokemons] = useState<any[]>([])    
     useEffect(() => {
         async function buscarPokemons() {
             try {

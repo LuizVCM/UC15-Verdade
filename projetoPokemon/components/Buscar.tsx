@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, FlatList, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import CardPokemon from './CardPokemon'
 
-const Buscar = () => {
+const Buscar = ({navigation}: any) => {
     const [nome, setNome] = useState<string>('')          
-    const [termoBusca, setTermoBusca] = useState<string>('') 
+    const [encontrados, setEncontrado] = useState<string>('') 
     const [pokemons, setPokemons] = useState<any[]>([])    
     useEffect(() => {
         async function buscarPokemons() {
@@ -26,11 +26,12 @@ const Buscar = () => {
     }
 
     const dados = pokemons.filter((item) =>
-        item.name.toLowerCase().includes(termoBusca.toLowerCase())
+        item.name.toLowerCase().includes(encontrados.toLowerCase())
     )
 
     return (
         <View style={styles.agrupar}>
+            <Button title='voltar' onPress={() => navigation.navigate('Home')}/>
             <View style={styles.pesquisa}>
                 <Text style={styles.txt}>Pesquisar nome de pokemon:</Text>
                 <TextInput
@@ -39,7 +40,7 @@ const Buscar = () => {
                     onChangeText={setNome}
                     style={[styles.txt, styles.input]}
                 />
-                <TouchableOpacity style={styles.botao} onPress={() => setTermoBusca(nome)}>
+                <TouchableOpacity style={styles.botao} onPress={() => setEncontrado(nome)}>
                     <Text style={styles.txt}>Procurar</Text>
                 </TouchableOpacity>
             </View>

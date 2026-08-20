@@ -1,13 +1,4 @@
-import {
-    Button,
-    FlatList,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from 'react-native'
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 import React, { useEffect, useState } from 'react'
 import CardFilme from './CardFilme'
@@ -45,13 +36,10 @@ const ListaFilmes = ({ navigation }: any) => {
         filme()
 
     }, [])
-
+      
     // Procura pelo nome dentro de cada objeto
-    const dados = filmes.filter((item) =>
-        item.name
-            .toLowerCase()
-            .includes(encontrados.toLowerCase())
-    )
+    const dados = filmes.filter((item) => item.name.toLowerCase().includes(encontrados.toLowerCase())
+)
 
     return (
 
@@ -85,6 +73,7 @@ const ListaFilmes = ({ navigation }: any) => {
                 renderItem={({ item }) => (
 
                     <CardFilme
+                        id={item.id}
                         nome={item.name}
                         genero={item.genres[0]}
                         imagem={item.image?.medium}

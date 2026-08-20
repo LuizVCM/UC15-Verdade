@@ -10,14 +10,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import Perfil from './pages/Perfil';
 import Infos from './components/Infos';
+import { FavoritosProvider } from './components/Favoritar'
 
 const Tab = createBottomTabNavigator()
 
 
 export default function App() {
   return (
-    
-
+    <FavoritosProvider>
     <NavigationContainer>
 
     <Tab.Navigator initialRouteName='Início'>
@@ -33,10 +33,11 @@ export default function App() {
        < Tab.Screen name='Infos' component={Infos} options={{ tabBarStyle:{display: 'none'}, tabBarButton: () => null
       }}/>
 
-
-      
     </Tab.Navigator>
    </NavigationContainer>
+   
+   </FavoritosProvider>
+
   );
 }
 

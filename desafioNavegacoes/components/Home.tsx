@@ -14,39 +14,28 @@ const ListaFilmes = ({ navigation }: any) => {
         async function filme() {
 
             try {
-
                 const resposta = await fetch(
                     "https://api.tvmaze.com/shows"
                 )
-
                 const filme = await resposta.json()
-
-                // Aqui está o array de objetos da API
                 setFilmes(filme)
 
             } catch (erro) {
 
-                console.log(
-                    "Erro ao puxar dados da API",
-                    erro
-                )
+                console.log("Erro ao puxar dados da API", erro)
             }
         }
 
         filme()
 
     }, [])
-      
-    // Procura pelo nome dentro de cada objeto
+
     const dados = filmes.filter((item) => item.name.toLowerCase().includes(encontrados.toLowerCase())
-)
+    )
 
     return (
-
         <View style={styles.agrupar}>
-
             <View style={styles.pesquisa}>
-
                 <TextInput
                     value={nome}
                     placeholder="procurar filme"
@@ -54,24 +43,18 @@ const ListaFilmes = ({ navigation }: any) => {
                     style={[styles.txt, styles.input]}
                 />
 
-                <TouchableOpacity
-                    style={styles.botao}
-                    onPress={() => setEncontrado(nome)}
-                >
+                <TouchableOpacity style={styles.botao} onPress={() => setEncontrado(nome)}>
                     <Text style={styles.txt}>
                         Procurar
                     </Text>
                 </TouchableOpacity>
-
             </View>
-
             <FlatList
                 style={styles.pkmns}
                 data={dados}
                 numColumns={1}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-
                     <CardFilme
                         id={item.id}
                         nome={item.name}
@@ -79,13 +62,10 @@ const ListaFilmes = ({ navigation }: any) => {
                         imagem={item.image?.medium}
                     />
 
-                )}
-            />
-
-        </View>
+                )} />
+             </View>
     )
 }
-
 export default ListaFilmes
 
 const styles = StyleSheet.create({

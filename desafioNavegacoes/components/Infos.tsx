@@ -10,10 +10,10 @@ interface Filme {
     original: string
   }
   summary: string,
-  genrer: [0]
-  premiered: string | null,
-  rating?:{
-    average: number | null
+  genres: string
+  premiered: string,
+  rating:{
+    average: number
   }
 
 }
@@ -74,6 +74,7 @@ const Infos = ({ route, navigation }: any) => {
         <View style={styles.agrupar3}>
         <Text style={styles.elements}>Nota:  {filme.rating?.average}</Text>
                 <Text style={[styles.elements, styles.cor1]}>Ano de lançamento:  {filme.premiered}</Text>
+                <Text style={styles.elements}> Gênero: {filme.genres[0]}</Text>
 </View>
         <Text style={styles.descricao}>
           {filme.summary

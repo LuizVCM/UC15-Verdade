@@ -17,28 +17,20 @@ const Favoritos = () => {
     const { favoritos } = useFavoritos()
 
     const [filmes, setFilmes] = useState<any[]>([])
-
-
     useEffect(() => {
-
         async function buscarFavoritos() {
 
             try {
 
                 const resultados = await Promise.all(
-
                     favoritos.map(async (id) => {
 
                         const resposta = await fetch(
                             `https://api.tvmaze.com/shows/${id}`
                         )
-
                         return await resposta.json()
-
                     })
-
                 )
-
                 setFilmes(resultados)
 
             } catch (erro) {
@@ -47,42 +39,28 @@ const Favoritos = () => {
                     'Erro ao buscar favoritos:',
                     erro
                 )
-
             }
-
         }
-
         buscarFavoritos()
 
     }, [favoritos])
 
-
     return (
-
         <View style={styles.container}>
-
             <Text style={styles.titulo}>
                 Meus favoritos
             </Text>
-
-
             {filmes.length === 0 ? (
-
                 <Text style={styles.vazio}>
                     Nenhum filme favoritado.
                 </Text>
-
             ) : (
-
                 <FlatList
                     data={filmes}
-
                     keyExtractor={(item) =>
                         item.id.toString()
                     }
-
                     renderItem={({ item }) => (
-
                         <CardFilme
                             id={item.id}
                             nome={item.name}
